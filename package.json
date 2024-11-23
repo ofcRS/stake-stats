@@ -1,0 +1,19 @@
+{
+	"name": "strategy-simulator",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "A simulator for a betting strategy",
+	"main": "index.js",
+	"scripts": {
+		"build": "node esbuild.config.js",
+		"watch": "WATCH=true node esbuild.config.js",
+		"start": "npm run build && echo 'Build complete!'"
+	},
+	"keywords": ["betting", "strategy", "simulator"],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"esbuild": "^0.17.19"
+	}
+}
