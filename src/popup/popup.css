@@ -1,0 +1,55 @@
+/* popup/popup.css */
+
+body {
+    font-family: Arial, sans-serif;
+    width: 300px;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+#number-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#number-list li {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+#bar-chart {
+    margin-top: 15px;
+}
+
+#statistics p {
+    margin: 5px 0;
+}
+
+/* Add styles for navigation */
+
+#navigation {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#navigation a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#navigation a:hover {
+    text-decoration: underline;
+}
