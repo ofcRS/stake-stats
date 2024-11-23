@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RNG Statistics Analyzer - Detailed Stats</title>
+    <link rel="stylesheet" href="stats.css">
+    <!-- Include Chart.js for visualizations -->
+</head>
+
+<body>
+    <header>
+        <h1>Stake.com RNG Statistics Analyzer <cite>(developed&nbsp;by&nbsp;<a
+                    href="https://kick.com/ofcRS">kick.com/ofcRS</a>)</cite></h1>
+    </header>
+    <nav>
+        <button id="refresh-btn">Refresh Data</button>
+        <button id="clear-data-btn">Clear Data</button>
+    </nav>
+    <main>
+        <section id="last-entries">
+            <canvas id="historicalChart"></canvas>
+        </section>
+
+        <section id="statistics">
+            <h2>Basic Statistics</h2>
+            <p>Spins without WIN: <span id="spins-without-win">0</span></p>
+            <p>Average: <span id="average">0</span></p>
+            <p>Variation: <span id="variation">0%</span></p>
+            <p>Total: <span id="total">0</span></p>
+        </section>
+        <div class="stack">
+            <section id="probability">
+                <h2>Probability</h2>
+                <p>Current Sequence Probability: <span id="current-sequence-probability">0</span></p>
+                <p>Win Probability on next spin: <span id="win-probability-on-next-spin">0</span></p>
+                <p>Win Probability after 10 spins: <span id="probability-after-10-spins">0</span></p>
+                <p>Target Win Probability: <span id="target-probability">0</span></p>
+                <p>Target Spins: <span id="target-spins">0</span></p>
+                <p>Spins to get target probability: <span id="spins-to-get-target-probability">0</span></p>
+            </section>
+            <section>
+                <h2>Info</h2>
+                <p>Win Number: <span id="win-number">0</span></p>
+                <p>Last number: <span id="last-number">0</span></p>
+                <div id="bet-decision">
+                    <h4>Bet?</h4>
+                    <p id="bet-decision-text">No</p>
+                </div>
+            </section>
+        </div>
+        <section id="distribution-chart">
+            <h2>Number Distribution</h2>
+            <canvas id="distributionChart"></canvas>
+        </section>
+        <section id="advanced-statistics">
+            <h2>Advanced Statistics</h2>
+            <p><strong>Chi-Square Test:</strong> <span id="chi-square">-</span></p>
+            <p><strong>p-Value:</strong> <span id="p-value">-</span></p>
+            <p><strong>Entropy:</strong> <span id="entropy">-</span> bits</p>
+            <p><strong>Runs:</strong> <span id="runs">-</span></p>
+            <p><strong>Auto-correlation (lag 1):</strong> <span id="auto-corr">-</span></p>
+        </section>
+        <section id="detailed-logs">
+            <h2>Detailed Logs</h2>
+            <textarea id="logs" readonly></textarea>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 RNG Statistics Analyzer <cite>(developed&nbsp;by&nbsp;<a
+                    href="https://kick.com/ofcRS">kick.com/ofcRS</a>)</cite></p>
+    </footer>
+    <script src="../utils/jsstats.js"></script>
+    <script src="../utils/chart.js"></script>
+    <script type="module" src="stats.js"></script>
+</body>
+
+</html>
