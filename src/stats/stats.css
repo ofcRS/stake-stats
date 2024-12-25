@@ -55,6 +55,10 @@ section {
     padding: 12px;
 }
 
+section:last-child {
+    margin-bottom: 90px;
+}
+
 section p {
     display: flex;
     justify-content: space-between;
@@ -138,5 +142,60 @@ footer {
 }
 
 #bet-decision-text[data-decision="no"] {
+    color: var(--negative-color);
+}
+
+.segments-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+}
+
+.segments-control input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--nav-bg-color);
+    border-radius: 4px;
+    background-color: var(--nav-button-bg-color);
+    color: var(--text-color);
+}
+
+.segments-control label {
+    font-weight: bold;
+}
+
+.number-input-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+}
+
+.number-input-control input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--nav-bg-color);
+    border-radius: 4px;
+    background-color: var(--nav-button-bg-color);
+    color: var(--text-color);
+}
+
+.number-input-control button {
+    padding: 8px 16px;
+}
+
+#advanced-statistics {
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    transition: opacity 0.3s ease;
+}
+
+#advanced-statistics:hover {
+    opacity: 1;
+}
+
+.unavailable {
     color: var(--negative-color);
 }

@@ -2,10 +2,11 @@ import {
 	getAllNumbers,
 	getDistribution,
 	getStatistics,
+	storeNumber,
 } from "../utils/storage.js";
 import { getChiSquare } from "../utils/stats.js";
 
-let segments = 10;
+let segments = Number(localStorage.getItem('segments')) || 10;
 
 let chart = null;
 let historicalChart = null; // New chart instance for historical data
@@ -16,6 +17,15 @@ const formatPercentage = (value) => {
 
 const formatNumber = (value) => {
 	return value.toFixed(2);
+};
+
+const handleNumberInput = async (number) => {
+	if (number < 0 || number >= segments) {
+		console.error('Invalid number:', number);
+		return;
+	}
+	await storeNumber(number);
+	renderData();
 };
 
 const renderData = async () => {
@@ -68,14 +78,52 @@ const renderData = async () => {
 	const decisionTextElement = document.getElementById("bet-decision-text");
 	decisionTextElement.setAttribute("data-decision", shouldBet ? "yes" : "no");
 	decisionTextElement.textContent = shouldBet ? "Yes" : "No";
-
-	const { chiSquareStatistic, pValue } = await getChiSquare(segments);
-	document.getElementById("chi-square").textContent = chiSquareStatistic;
-	document.getElementById("p-value").textContent = pValue;
-
 };
 
 document.addEventListener("DOMContentLoaded", renderData);
+
+document.addEventListener("DOMContentLoaded", () => {
+	console.log("DOMContentLoaded");
+	// Set initial value
+	const segmentsInput = document.getElementById("segments-input");
+	segmentsInput.value = segments;
+	
+	// Handle input changes
+	segmentsInput.addEventListener("change", (e) => {
+		const newValue = Number(e.target.value);
+		if (newValue >= 2 && newValue <= 50) {
+			segments = newValue;
+			localStorage.setItem('segments', segments);
+			renderData();
+		} else {
+			// Reset to valid value if input is invalid
+			e.target.value = segments;
+		}
+	});
+
+	// Add number input handling
+	const numberInput = document.getElementById("number-input");
+	const addNumberBtn = document.getElementById("add-number-btn");
+	
+	const handleNumberSubmit = async () => {
+		const number = Number(numberInput.value);
+		if (number >= 0 && number < segments) {
+			await storeNumber(number);
+			renderData();
+			numberInput.value = "0";
+		} else {
+			alert(`Please enter a number between 0 and ${segments - 1}`);
+		}
+	};
+
+	addNumberBtn.addEventListener("click", handleNumberSubmit);
+	
+	numberInput.addEventListener("keypress", (e) => {
+		if (e.key === "Enter") {
+			handleNumberSubmit();
+		}
+	});
+});
 
 function renderBarChart(distribution) {
 	const ctx = document.getElementById("distributionChart").getContext("2d");
@@ -250,7 +298,11 @@ document
 chrome.runtime.onMessage.addListener((message, _sender) => {
 	console.log(message);
 	if (message.type === "REFRESH_DATA") {
-		segments = message.segments;
+		// Only update segments if provided in message
+		if (message.segments) {
+			segments = message.segments;
+			document.getElementById("segments-input").value = segments;
+		}
 		renderData();
 	}
 });

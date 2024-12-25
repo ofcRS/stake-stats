@@ -1,5 +1,18 @@
 // utils/storage.js
 
+// Helper to get all data
+async function getData() {
+	const numbers = JSON.parse(localStorage.getItem("numbers")) || [];
+	const distribution = JSON.parse(localStorage.getItem("distribution")) || {};
+	return { numbers, distribution };
+}
+
+// Helper to save all data
+async function saveData(numbers, distribution) {
+	localStorage.setItem("numbers", JSON.stringify(numbers));
+	localStorage.setItem("distribution", JSON.stringify(distribution));
+}
+
 // Store a new number
 async function storeNumber(number) {
 	const { numbers, distribution } = await getData();
@@ -14,7 +27,7 @@ async function storeNumber(number) {
 	}
 
 	// Save updated data
-	chrome.storage.local.set({ numbers, distribution });
+	await saveData(numbers, distribution);
 }
 
 // Retrieve last N numbers
@@ -75,15 +88,6 @@ async function getStatistics(segments) {
 async function getAllNumbers() {
 	const data = await getData();
 	return data.numbers;
-}
-
-// Helper to get all data
-async function getData() {
-	const result = await chrome.storage.local.get(["numbers", "distribution"]);
-	return {
-		numbers: result.numbers || [],
-		distribution: result.distribution || {},
-	};
 }
 
 // make sure that we are inside ESM

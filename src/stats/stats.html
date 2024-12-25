@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>RNG Statistics Analyzer - Detailed Stats</title>
     <link rel="stylesheet" href="stats.css">
-    <!-- Include Chart.js for visualizations -->
 </head>
 
 <body>
@@ -16,12 +15,17 @@
     <nav>
         <button id="refresh-btn">Refresh Data</button>
         <button id="clear-data-btn">Clear Data</button>
+        <div class="segments-control">
+            <label for="segments-input">Segments:</label>
+            <input type="number" id="segments-input" min="2" max="50" value="10">
+        </div>
+        <div class="number-input-control">
+            <label for="number-input">Number:</label>
+            <input type="number" id="number-input" min="0" value="0">
+            <button id="add-number-btn">Add</button>
+        </div>
     </nav>
     <main>
-        <section id="last-entries">
-            <canvas id="historicalChart"></canvas>
-        </section>
-
         <section id="statistics">
             <h2>Basic Statistics</h2>
             <p>Spins without WIN: <span id="spins-without-win">0</span></p>
@@ -54,24 +58,20 @@
             <canvas id="distributionChart"></canvas>
         </section>
         <section id="advanced-statistics">
-            <h2>Advanced Statistics</h2>
+            <h2>Advanced Statistics <span class="unavailable">(unavailable for free users)</span></h2>
             <p><strong>Chi-Square Test:</strong> <span id="chi-square">-</span></p>
             <p><strong>p-Value:</strong> <span id="p-value">-</span></p>
-            <p><strong>Entropy:</strong> <span id="entropy">-</span> bits</p>
+            <p><strong>Entropy:</strong> <span id="entropy">-</span></p>
             <p><strong>Runs:</strong> <span id="runs">-</span></p>
             <p><strong>Auto-correlation (lag 1):</strong> <span id="auto-corr">-</span></p>
-        </section>
-        <section id="detailed-logs">
-            <h2>Detailed Logs</h2>
-            <textarea id="logs" readonly></textarea>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 RNG Statistics Analyzer <cite>(developed&nbsp;by&nbsp;<a
                     href="https://kick.com/ofcRS">kick.com/ofcRS</a>)</cite></p>
     </footer>
-    <script src="../utils/jsstats.js"></script>
-    <script src="../utils/chart.js"></script>
+    <script src="jsstats.js"></script>
+    <script src="chart.js"></script>
     <script type="module" src="stats.js"></script>
 </body>
 
